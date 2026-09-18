@@ -1,0 +1,1316 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Positioning Adventure</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7ff;
+            color: #1f2937;
+        }
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        header {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        header h1 {
+            margin: 0 0 8px;
+            font-size: 32px;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 17px;
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================== */
+
+        .container {
+            width: 92%;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+
+        /* =========================
+           POSITION SLIDER
+        ========================== */
+
+        .position-selector {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .position-selector h2 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .slider-wrapper {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        #positionSlider {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .slider-labels span {
+            cursor: pointer;
+        }
+
+        .current-position {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           CONTENT GRID
+        ========================== */
+
+        .content {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 25px;
+        }
+
+
+        /* =========================
+           EXPLANATION
+        ========================== */
+
+        .explanation {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .number {
+            display: inline-flex;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .explanation h2 {
+            display: inline;
+            margin-left: 10px;
+        }
+
+        .big-explanation {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-top: 25px;
+        }
+
+        .kid-example {
+            margin-top: 20px;
+            background: #fff7d6;
+            border-left: 6px solid #f5b700;
+            padding: 15px;
+            border-radius: 8px;
+            line-height: 1.5;
+        }
+
+        .code-box {
+            margin-top: 20px;
+            background: #111827;
+            color: #e5e7eb;
+            border-radius: 10px;
+            padding: 15px;
+            font-family: monospace;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .keyword {
+            color: #60a5fa;
+        }
+
+
+        /* =========================
+           PLAYGROUND
+        ========================== */
+
+        .playground-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .playground-title {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .scene {
+            height: 430px;
+            border: 4px dashed #94a3b8;
+            border-radius: 15px;
+            background: #e0f2fe;
+            position: relative;
+            overflow: auto;
+            padding: 20px;
+        }
+
+        .parent-label {
+            font-weight: bold;
+            color: #475569;
+        }
+
+
+        /* =========================
+           BOX
+        ========================== */
+
+        .box {
+            width: 130px;
+            height: 90px;
+
+            background: #facc15;
+            border: 4px solid #ca8a04;
+            border-radius: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+            font-size: 17px;
+
+            text-align: center;
+
+            transition: all 0.5s ease;
+
+            margin-top: 40px;
+        }
+
+
+        /* STATIC */
+
+        .box.static {
+            position: static;
+        }
+
+
+        /* RELATIVE */
+
+        .box.relative {
+            position: relative;
+        }
+
+
+        /* ABSOLUTE */
+
+        .box.absolute {
+            position: absolute;
+        }
+
+
+        /* FIXED */
+
+        .box.fixed {
+            position: fixed;
+
+            right: 25px;
+            bottom: 25px;
+
+            z-index: 100;
+        }
+
+
+        /* STICKY */
+
+        .box.sticky {
+            position: sticky;
+            top: 10px;
+
+            margin-top: 180px;
+        }
+
+
+        /* =========================
+           MOVEMENT CONTROLS
+        ========================== */
+
+        .controls {
+            margin-top: 20px;
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 12px;
+        }
+
+        .controls h3 {
+            margin-top: 0;
+        }
+
+        .control-row {
+            display: grid;
+            grid-template-columns: 70px 1fr 70px;
+            align-items: center;
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .control-row input {
+            width: 100%;
+        }
+
+        .value {
+            background: white;
+            padding: 5px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .disabled {
+            opacity: 0.4;
+        }
+
+
+        /* =========================
+           BUTTONS
+        ========================== */
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+
+        /* =========================
+           CHALLENGE
+        ========================== */
+
+        .challenge {
+            margin-top: 25px;
+            background: #ede9fe;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .challenge h2 {
+            margin-top: 0;
+        }
+
+
+        /* =========================
+           EXTRA CONTENT FOR SCROLL
+        ========================== */
+
+        .scroll-content {
+            height: 900px;
+            padding-top: 40px;
+            text-align: center;
+            color: #64748b;
+        }
+
+        .scroll-content p {
+            margin: 80px 0;
+            font-size: 18px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 800px) {
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .slider-labels {
+                font-size: 11px;
+            }
+
+            .control-row {
+                grid-template-columns: 60px 1fr 60px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<header>
+
+    <h1>CSS Positioning Adventure</h1>
+
+    <p>
+        Move the slider and discover how CSS positioning works!
+    </p>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- =========================
+         POSITION SELECTOR
+    ========================== -->
+
+    <section class="position-selector">
+
+        <h2>Choose a Position</h2>
+
+        <div class="slider-wrapper">
+
+            <input
+                type="range"
+                id="positionSlider"
+                min="0"
+                max="4"
+                value="0"
+                step="1"
+            >
+
+            <div class="slider-labels">
+
+                <span onclick="setPosition(0)">
+                    Static
+                </span>
+
+                <span onclick="setPosition(1)">
+                    Relative
+                </span>
+
+                <span onclick="setPosition(2)">
+                    Absolute
+                </span>
+
+                <span onclick="setPosition(3)">
+                    Fixed
+                </span>
+
+                <span onclick="setPosition(4)">
+                    Sticky
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="current-position"
+            id="currentPosition"
+        >
+            Static
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <div class="content">
+
+
+        <!-- =========================
+             EXPLANATION
+        ========================== -->
+
+        <section class="explanation">
+
+            <div>
+
+                <span
+                    class="number"
+                    id="positionNumber"
+                >
+                    1
+                </span>
+
+                <h2 id="explanationTitle">
+                    Static
+                </h2>
+
+            </div>
+
+
+            <div
+                class="big-explanation"
+                id="explanationText"
+            >
+                The box stays in its normal place.
+                The browser decides where it should go.
+            </div>
+
+
+            <div
+                class="kid-example"
+                id="kidExample"
+            >
+                <strong>Think about it like this:</strong>
+
+                <br><br>
+
+                Kids standing in a line.
+
+                <br>
+
+                Everyone stays in their normal place.
+            </div>
+
+
+            <div
+                class="code-box"
+                id="codeBox"
+            >
+
+                .box {
+
+                <br>
+
+                &nbsp;&nbsp;position:
+                <span class="keyword">static</span>;
+
+                <br>
+
+                }
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             PLAYGROUND
+        ========================== -->
+
+        <section class="playground-card">
+
+            <h2 class="playground-title">
+                Playground
+            </h2>
+
+
+            <div
+                class="scene"
+                id="scene"
+            >
+
+                <div class="parent-label">
+                    Parent Box
+                </div>
+
+
+                <div
+                    id="box"
+                    class="box static"
+                >
+                    I'm the box!
+                </div>
+
+
+                <div
+                    class="scroll-content"
+                    id="scrollContent"
+                >
+
+                    <p>
+                        Scroll me!
+                    </p>
+
+                    <p>
+                        Keep scrolling...
+                    </p>
+
+                    <p>
+                        Something interesting happens
+                        with sticky!
+                    </p>
+
+                    <p>
+                        Keep going...
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 CONTROLS
+            ========================== -->
+
+            <div
+                class="controls"
+                id="movementControls"
+            >
+
+                <h3>
+                    Move the box
+                </h3>
+
+
+                <div
+                    class="control-row"
+                    id="topControl"
+                >
+
+                    <label>
+                        Top
+                    </label>
+
+                    <input
+                        type="range"
+                        id="topSlider"
+                        min="-100"
+                        max="200"
+                        value="0"
+                    >
+
+                    <div
+                        class="value"
+                        id="topValue"
+                    >
+                        0px
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="control-row"
+                    id="leftControl"
+                >
+
+                    <label>
+                        Left
+                    </label>
+
+                    <input
+                        type="range"
+                        id="leftSlider"
+                        min="-100"
+                        max="300"
+                        value="0"
+                    >
+
+                    <div
+                        class="value"
+                        id="leftValue"
+                    >
+                        0px
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="control-row"
+                    id="rightControl"
+                >
+
+                    <label>
+                        Right
+                    </label>
+
+                    <input
+                        type="range"
+                        id="rightSlider"
+                        min="0"
+                        max="300"
+                        value="0"
+                    >
+
+                    <div
+                        class="value"
+                        id="rightValue"
+                    >
+                        0px
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BUTTONS -->
+
+            <div class="buttons">
+
+                <button onclick="previousPosition()">
+                    ← Previous
+                </button>
+
+                <button onclick="resetPosition()">
+                    Reset
+                </button>
+
+                <button onclick="nextPosition()">
+                    Next →
+                </button>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+
+    <!-- =========================
+         CHALLENGE
+    ========================== -->
+
+    <section class="challenge">
+
+        <h2>
+            Mini Challenge
+        </h2>
+
+        <p id="challengeText">
+
+            Which position should you use if you want
+            an element to stay attached to the screen
+            while the user scrolls?
+
+        </p>
+
+        <button onclick="showAnswer()">
+            Show Answer
+        </button>
+
+        <p
+            id="answer"
+            style="font-weight:bold;"
+        ></p>
+
+    </section>
+
+</div>
+
+
+
+<script>
+
+    /* =================================
+       POSITION DATA
+    ================================= */
+
+    const positions = [
+
+        {
+            name: "Static",
+
+            explanation:
+                "The box stays in its normal place. " +
+                "The browser decides where it should go.",
+
+            example:
+                "Think about kids standing in a line. " +
+                "Everyone stays in their normal place.",
+
+            code:
+                "position: static;",
+
+            challenge:
+                "Which position means the element follows the normal flow of the page?",
+
+            answer:
+                "Static"
+        },
+
+
+        {
+            name: "Relative",
+
+            explanation:
+                "The box starts in its normal place, " +
+                "but we can move it from that original position " +
+                "using top, left, right or bottom.",
+
+            example:
+                "Imagine standing in your place in a line, " +
+                "but taking two steps to the right. " +
+                "Your original spot is still yours.",
+
+            code:
+                "position: relative;",
+
+            challenge:
+                "Which position lets you move an element from its normal position?",
+
+            answer:
+                "Relative"
+        },
+
+
+        {
+            name: "Absolute",
+
+            explanation:
+                "The box is removed from the normal flow. " +
+                "We can place it at an exact location inside " +
+                "its nearest positioned parent.",
+
+            example:
+                "Imagine a toy inside a box. " +
+                "You can tell the toy exactly where to sit inside the box.",
+
+            code:
+                "position: absolute;\ntop: 50px;\nleft: 100px;",
+
+            challenge:
+                "Which position is useful when you want to place something at an exact location inside a parent?",
+
+            answer:
+                "Absolute"
+        },
+
+
+        {
+            name: "Fixed",
+
+            explanation:
+                "The box is attached to the browser window. " +
+                "Scroll the page and watch it stay in the same place.",
+
+            example:
+                "Imagine putting a sticker on your computer screen. " +
+                "The webpage moves, but the sticker stays on the screen.",
+
+            code:
+                "position: fixed;\nright: 20px;\nbottom: 20px;",
+
+            challenge:
+                "Which position keeps an element attached to the screen while scrolling?",
+
+            answer:
+                "Fixed"
+        },
+
+
+        {
+            name: "Sticky",
+
+            explanation:
+                "The box behaves like a normal element at first. " +
+                "When you scroll and it reaches its sticky position, " +
+                "it sticks there.",
+
+            example:
+                "Imagine walking normally, then reaching a wall " +
+                "that makes you stop at the top.",
+
+            code:
+                "position: sticky;\ntop: 10px;",
+
+            challenge:
+                "Which position behaves normally first and then sticks while scrolling?",
+
+            answer:
+                "Sticky"
+        }
+
+    ];
+
+
+
+    /* =================================
+       GET ELEMENTS
+    ================================= */
+
+    const slider =
+        document.getElementById("positionSlider");
+
+    const box =
+        document.getElementById("box");
+
+    const scene =
+        document.getElementById("scene");
+
+    const currentPosition =
+        document.getElementById("currentPosition");
+
+    const positionNumber =
+        document.getElementById("positionNumber");
+
+    const explanationTitle =
+        document.getElementById("explanationTitle");
+
+    const explanationText =
+        document.getElementById("explanationText");
+
+    const kidExample =
+        document.getElementById("kidExample");
+
+    const codeBox =
+        document.getElementById("codeBox");
+
+    const challengeText =
+        document.getElementById("challengeText");
+
+    const answer =
+        document.getElementById("answer");
+
+
+
+    /* =================================
+       SLIDER
+    ================================= */
+
+    slider.addEventListener("input", function () {
+
+        changePosition(Number(slider.value));
+
+    });
+
+
+
+    function setPosition(number) {
+
+        slider.value = number;
+
+        changePosition(number);
+
+    }
+
+
+
+    /* =================================
+       CHANGE POSITION
+    ================================= */
+
+    function changePosition(number) {
+
+        const position =
+            positions[number];
+
+        /* Update text */
+
+        currentPosition.textContent =
+            position.name;
+
+        positionNumber.textContent =
+            number + 1;
+
+        explanationTitle.textContent =
+            position.name;
+
+        explanationText.textContent =
+            position.explanation;
+
+        kidExample.innerHTML =
+            "<strong>Think about it like this:</strong><br><br>" +
+            position.example;
+
+        codeBox.innerHTML =
+            ".box {<br>&nbsp;&nbsp;" +
+            position.code.replace(
+                /\n/g,
+                "<br>&nbsp;&nbsp;"
+            ) +
+            "<br>}";
+
+        challengeText.textContent =
+            position.challenge;
+
+        answer.textContent = "";
+
+
+        /* Remove all old classes */
+
+        box.classList.remove(
+            "static",
+            "relative",
+            "absolute",
+            "fixed",
+            "sticky"
+        );
+
+
+        /* Add current class */
+
+        box.classList.add(
+            position.name.toLowerCase()
+        );
+
+
+        /* Reset movement */
+
+        resetMovement();
+
+
+        /* Change playground */
+
+        if (position.name === "Static") {
+
+            box.textContent =
+                "I'm in my normal place!";
+
+        }
+
+        else if (position.name === "Relative") {
+
+            box.textContent =
+                "Move me!";
+
+        }
+
+        else if (position.name === "Absolute") {
+
+            box.textContent =
+                "Place me anywhere!";
+
+        }
+
+        else if (position.name === "Fixed") {
+
+            box.textContent =
+                "I'm fixed!";
+
+        }
+
+        else if (position.name === "Sticky") {
+
+            box.textContent =
+                "Scroll me!";
+
+        }
+
+
+        updateControls(number);
+
+    }
+
+
+
+    /* =================================
+       MOVEMENT CONTROLS
+    ================================= */
+
+    const topSlider =
+        document.getElementById("topSlider");
+
+    const leftSlider =
+        document.getElementById("leftSlider");
+
+    const rightSlider =
+        document.getElementById("rightSlider");
+
+    const topValue =
+        document.getElementById("topValue");
+
+    const leftValue =
+        document.getElementById("leftValue");
+
+    const rightValue =
+        document.getElementById("rightValue");
+
+
+    topSlider.addEventListener("input", updateBox);
+
+    leftSlider.addEventListener("input", updateBox);
+
+    rightSlider.addEventListener("input", updateBox);
+
+
+
+    function updateBox() {
+
+        const current =
+            positions[Number(slider.value)].name;
+
+
+        const top =
+            Number(topSlider.value);
+
+        const left =
+            Number(leftSlider.value);
+
+        const right =
+            Number(rightSlider.value);
+
+
+        topValue.textContent =
+            top + "px";
+
+        leftValue.textContent =
+            left + "px";
+
+        rightValue.textContent =
+            right + "px";
+
+
+        if (
+            current === "Relative" ||
+            current === "Absolute"
+        ) {
+
+            box.style.top =
+                top + "px";
+
+            box.style.left =
+                left + "px";
+
+        }
+
+
+        if (current === "Fixed") {
+
+            box.style.top =
+                "auto";
+
+            box.style.left =
+                "auto";
+
+            box.style.right =
+                right + "px";
+
+            box.style.bottom =
+                top + "px";
+
+        }
+
+    }
+
+
+
+    /* =================================
+       ENABLE / DISABLE CONTROLS
+    ================================= */
+
+    function updateControls(number) {
+
+        const current =
+            positions[number].name;
+
+        const topControl =
+            document.getElementById("topControl");
+
+        const leftControl =
+            document.getElementById("leftControl");
+
+        const rightControl =
+            document.getElementById("rightControl");
+
+
+        /* Start disabled */
+
+        topControl.classList.add("disabled");
+
+        leftControl.classList.add("disabled");
+
+        rightControl.classList.add("disabled");
+
+
+        /* Relative */
+
+        if (current === "Relative") {
+
+            topControl.classList.remove("disabled");
+
+            leftControl.classList.remove("disabled");
+
+        }
+
+
+        /* Absolute */
+
+        if (current === "Absolute") {
+
+            topControl.classList.remove("disabled");
+
+            leftControl.classList.remove("disabled");
+
+        }
+
+
+        /* Fixed */
+
+        if (current === "Fixed") {
+
+            topControl.classList.remove("disabled");
+
+            rightControl.classList.remove("disabled");
+
+        }
+
+    }
+
+
+
+    /* =================================
+       RESET MOVEMENT
+    ================================= */
+
+    function resetMovement() {
+
+        topSlider.value = 0;
+
+        leftSlider.value = 0;
+
+        rightSlider.value = 0;
+
+
+        topValue.textContent =
+            "0px";
+
+        leftValue.textContent =
+            "0px";
+
+        rightValue.textContent =
+            "0px";
+
+
+        box.style.top = "";
+
+        box.style.left = "";
+
+        box.style.right = "";
+
+        box.style.bottom = "";
+
+    }
+
+
+
+    function resetPosition() {
+
+        setPosition(0);
+
+        scene.scrollTop = 0;
+
+    }
+
+
+
+    /* =================================
+       NEXT / PREVIOUS
+    ================================= */
+
+    function nextPosition() {
+
+        let number =
+            Number(slider.value);
+
+        if (number < 4) {
+
+            number++;
+
+            setPosition(number);
+
+        }
+
+    }
+
+
+    function previousPosition() {
+
+        let number =
+            Number(slider.value);
+
+        if (number > 0) {
+
+            number--;
+
+            setPosition(number);
+
+        }
+
+    }
+
+
+
+    /* =================================
+       CHALLENGE ANSWER
+    ================================= */
+
+    function showAnswer() {
+
+        const number =
+            Number(slider.value);
+
+        answer.textContent =
+            "Answer: " +
+            positions[number].answer;
+
+    }
+
+
+
+    /* =================================
+       INITIAL STATE
+    ================================= */
+
+    changePosition(0);
+
+</script>
+
+</body>
+</html>
+```
